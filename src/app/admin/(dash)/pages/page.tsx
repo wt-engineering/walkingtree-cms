@@ -1,4 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
+import { Card, EmptyState, ErrorNote, PageHeader, StatusBadge, td, th } from "@/components/admin/ui";
+
+const label = (t: string) => t.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase());
 
 export default async function PagesList() {
   const supabase = await createClient();
@@ -6,18 +9,31 @@ export default async function PagesList() {
     .from("pages").select("id,title,path,type,status,updated_at").order("path");
 
   return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Pages</h1>
-      {error && <p className="text-red-600">{error.message}</p>}
-      <table className="w-full text-sm">
-        <thead><tr className="border-b text-left"><th className="py-2">Title</th><th>Path</th><th>Type</th><th>Status</th></tr></thead>
-        <tbody>
-          {pages?.map((p) => (
-            <tr key={p.id} className="border-b"><td className="py-2">{p.title}</td><td>{p.path}</td><td>{p.type}</td><td>{p.status}</td></tr>
-          ))}
-          {!pages?.length && <tr><td colSpan={4} className="py-6 text-neutral-500">No pages yet. Run the Sanity migration to import them.</td></tr>}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <PageHeader title="Pages" subtitle={`${pages?.length ?? 0} pages on the site`} />
+      {error && <ErrorNote message={error.message} />}
+      <Card className="overflow-hidden">
+        {pages?.length ? (
+          <table className="w-full">
+            <thead className="border-b border-line bg-bg/60">
+              <tr><th className={th}>Title</th><th className={th}>Path</th><th className={th}>Type</th><th className={th}>Status</th><th className={th}>Updated</th></tr>
+            </thead>
+            <tbody className="divide-y divide-line">
+              {pages.map((p) => (
+                <tr key={p.id} className="hover:bg-bg/60">
+                  <td className={`${td} font-medium`}>{p.title}</td>
+                  <td className={`${td} font-mono text-xs text-muted`}>{p.path}</td>
+                  <td className={`${td} text-muted`}>{label(p.type)}</td>
+                  <td className={td}><StatusBadge status={p.status} /></td>
+                  <td className={`${td} text-muted`}>{new Date(p.updated_at).toLocaleDateString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <EmptyState title="No pages yet" hint="Run the Sanity import to bring the existing site content in." />
+        )}
+      </Card>
+    </>
   );
 }

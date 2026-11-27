@@ -1,34 +1,40 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-
-const nav = [
-  ["Pages", "/admin/pages"],
-  ["Articles", "/admin/articles"],
-  ["Jobs", "/admin/jobs"],
-  ["Media", "/admin/media"],
-  ["Navigation", "/admin/navigation"],
-  ["Settings", "/admin/settings"],
-];
+import Nav from "@/components/admin/Nav";
+import SignOut from "@/components/admin/SignOut";
 
 export default async function DashLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/admin/login");
-  const { data: profile } = await supabase.from("profiles").select("role").eq("user_id", user.id).single();
+  const { data: profile } = await supabase.from("profiles").select("role").eq("user_id", user.id).maybeSingle();
+  const role = profile?.role ?? "viewer";
 
   return (
     <div className="flex min-h-screen">
-      <aside className="w-56 shrink-0 border-r bg-neutral-50 p-4">
-        <p className="mb-6 font-semibold">WT CMS</p>
-        <nav className="space-y-1">
-          {nav.map(([label, href]) => (
-            <Link key={href} href={href} className="block rounded px-2 py-1.5 text-sm hover:bg-neutral-200">{label}</Link>
-          ))}
-        </nav>
-        <p className="mt-8 text-xs text-neutral-500">{user.email} · {profile?.role ?? "viewer"}</p>
+      <aside className="sticky top-0 flex h-screen w-64 shrink-0 flex-col border-r border-line bg-surface px-4 py-5">
+        <div className="mb-8 flex items-center gap-2.5 px-2">
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent text-sm font-bold text-white">W</span>
+          <div className="leading-tight">
+            <p className="text-sm font-semibold">Walking Tree</p>
+            <p className="text-xs text-muted">Content studio</p>
+          </div>
+        </div>
+        <Nav />
+        <div className="mt-auto flex items-center gap-3 rounded-lg border border-line p-2.5">
+          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent-soft text-xs font-semibold uppercase text-accent">
+            {user.email?.[0] ?? "?"}
+          </span>
+          <div className="min-w-0 flex-1 leading-tight">
+            <p className="truncate text-xs font-medium">{user.email}</p>
+            <p className="text-xs capitalize text-muted">{role}</p>
+          </div>
+          <SignOut />
+        </div>
       </aside>
-      <main className="flex-1 p-8">{children}</main>
+      <main className="min-w-0 flex-1 px-10 py-9">
+        <div className="mx-auto max-w-5xl">{children}</div>
+      </main>
     </div>
   );
 }

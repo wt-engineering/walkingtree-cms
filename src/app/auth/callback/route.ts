@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     if (!error) {
       const { data: { user } } = await supabase.auth.getUser();
       if (user?.email?.toLowerCase().endsWith(`@${ALLOWED_DOMAIN}`)) {
-        return NextResponse.redirect(`${origin}/admin/pages`);
+        return NextResponse.redirect(`${origin}/admin`);
       }
       await supabase.auth.signOut(); // wrong domain
     }
