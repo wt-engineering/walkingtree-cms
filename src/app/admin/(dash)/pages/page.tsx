@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { Card, EmptyState, ErrorNote, PageHeader, StatusBadge, td, th } from "@/components/admin/ui";
 
@@ -21,7 +22,7 @@ export default async function PagesList() {
             <tbody className="divide-y divide-line">
               {pages.map((p) => (
                 <tr key={p.id} className="hover:bg-bg/60">
-                  <td className={`${td} font-medium`}>{p.title}</td>
+                  <td className={`${td} font-medium`}><Link href={`/admin/pages/${p.id}`} className="hover:text-accent hover:underline">{p.title}</Link></td>
                   <td className={`${td} font-mono text-xs text-muted`}>{p.path}</td>
                   <td className={`${td} text-muted`}>{label(p.type)}</td>
                   <td className={td}><StatusBadge status={p.status} /></td>
