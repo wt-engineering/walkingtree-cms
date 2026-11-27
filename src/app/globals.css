@@ -30,3 +30,25 @@ body {
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+@font-face { font-family: moderatThin; src: url(/fonts/Moderat-Thin.ttf); font-display: swap; }
+@font-face { font-family: moderatLight; src: url(/fonts/Moderat-Light.ttf); font-display: swap; }
+@font-face { font-family: moderatRegular; src: url(/fonts/Moderat-Regular.ttf); font-display: swap; }
+@font-face { font-family: moderatMedium; src: url(/fonts/Moderat-Medium.ttf); font-display: swap; }
+@font-face { font-family: pfdItalic; src: url(/fonts/PlayfairDisplay-Italic.ttf); font-display: swap; }
+
+/* public site */
+.site { font-family: moderatLight, ui-sans-serif, system-ui, sans-serif; background: #fff; color: #1a1a1a; }
+.site .serif { font-family: latienne-pro, "Cormorant Garamond", Georgia, serif; }
+.site .eyebrow { font-family: moderatMedium, sans-serif; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: #6d6e71; }
+.site .pad { padding-left: clamp(1.4rem, 6vw, 6.6rem); padding-right: clamp(1.4rem, 6vw, 6.6rem); }
+.site .rich p { margin: 0 0 1.1em; line-height: 1.75; }
+.site .rich h2, .site .rich h3 { font-family: latienne-pro, Georgia, serif; font-weight: 400; margin: 1.4em 0 0.5em; line-height: 1.2; }
+.site .rich h2 { font-size: clamp(1.8rem, 3.4vw, 2.8rem); }
+.site .rich h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); }
+.site .rich a { text-decoration: underline; text-underline-offset: 3px; }
+.site .rich ul { list-style: disc; padding-left: 1.3em; margin-bottom: 1.1em; }
+.site .rich blockquote { border-left: 2px solid #1a1a1a; padding-left: 1.2em; font-style: italic; }
+.site .snap { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.site .snap > * { scroll-snap-align: start; flex: 0 0 min(85%, 28rem); }
+.site .snap::-webkit-scrollbar { display: none; }
