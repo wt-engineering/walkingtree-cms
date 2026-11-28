@@ -47,7 +47,7 @@ console.log("setFileUploadTextUpdate",props);
                         // border-top: 1px solid #D90000;
                     }
                     input::placeholder { 
-                        color: #6d6e71ad;;
+                        color: hsla(225,2%,44%,.678);;
                     }
                     .borderBottom {
                         padding-bottom: 0.3rem;

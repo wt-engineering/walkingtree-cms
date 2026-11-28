@@ -124,55 +124,28 @@ function Footer(props) {
                 <div className={`col2 ${dropDownId==1?"expand":""}`}>
                   <h1 onClick={()=>dropDownClicked(1)} className="sectionHeading description marginBottom23 positionRelative black">Explore <span className="dropDownIcon">{!!dropDownId && dropDownId==1?<div className="dropDownInactiveLine"></div>:<LongArrow arrowLength="8px" arrowWidth="1px" color="black" direction="bottom-left" lineLength="15px" marginTop="6px" transformX="5px" transformY="1px" />}</span></h1>
                   <ul className="footerLinks listStyleNone">
-                    <li><Link
-                      href="/business-to-business/design-studio-india"
-                      onClick={() => loaderAbsentAfterHeroModuleIsLoaded()}
-                      className="bannerDescription  richText">Design Studio India</Link></li>
-                    <li><Link
-                      href="/business-to-business/design-studio-asia"
-                      onClick={() => loaderAbsentAfterHeroModuleIsLoaded()}
-                      className="bannerDescription richText">Design Studio Asia</Link></li>
-                    <li><Link
-                      href="/direct-to-consumer/aneka"
-                      onClick={() => loaderAbsentAfterHeroModuleIsLoaded()}
-                      className="bannerDescription richText">Aneka</Link></li>
-                    <li><Link
-                      href="/direct-to-consumer/unsaid"
-                      onClick={() => loaderAbsentAfterHeroModuleIsLoaded()}
-                      className="bannerDescription richText">Unsaid</Link></li>
-                    {/* <li><Link href="/articles"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription">Journal</a></Link></li> */}
+                    <li><Link legacyBehavior href="/business-to-business/design-studio-india"><a onClick={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription  richText">Design Studio India</a></Link></li>
+                    <li><Link legacyBehavior href="/business-to-business/design-studio-asia"><a onClick={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Design Studio Asia</a></Link></li>
+                    <li><Link legacyBehavior href="/direct-to-consumer/aneka"><a onClick={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Aneka</a></Link></li>
+                    <li><Link legacyBehavior href="/direct-to-consumer/unsaid"><a onClick={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Unsaid</a></Link></li>
+                    {/* <li><Link legacyBehavior href="/articles"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription">Journal</a></Link></li> */}
                   </ul>
                 </div>
                 <div className={`col3 ${dropDownId==2?"expand":""}`}>
                   <h1 onClick={()=>dropDownClicked(2)} className="sectionHeading description marginBottom23 positionRelative black">About <span className="dropDownIcon">{!!dropDownId && dropDownId==2?<div className="dropDownInactiveLine"></div>:<LongArrow arrowLength="8px" arrowWidth="1px" color="black" direction="bottom-left" lineLength="15px" marginTop="6px" transformX="5px" transformY="1px" />}</span></h1>
                   <ul className="footerLinks listStyleNone">
-                    <li><Link
-                      href="/creative-process/design-and-craftmanship"
-                      onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()}
-                      className="bannerDescription richText">Creative Process</Link></li>
-                    <li><Link
-                      href="/our-story"
-                      onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()}
-                      className="bannerDescription richText">The Group</Link></li>
-                    {/* <li><Link href="/group"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">The Group</a></Link></li> */}
-                    <li><Link
-                      href="/people"
-                      onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()}
-                      className="bannerDescription richText">Careers</Link></li>
-                    <li><Link
-                      href="/investor"
-                      onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()}
-                      className="bannerDescription richText">Investor</Link></li>
+                    <li><Link legacyBehavior href="/creative-process/design-and-craftmanship"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Creative Process</a></Link></li>
+                    <li><Link legacyBehavior href="/our-story"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">The Group</a></Link></li>
+                    {/* <li><Link legacyBehavior href="/group"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">The Group</a></Link></li> */}
+                    <li><Link legacyBehavior href="/people"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Careers</a></Link></li>
+                    <li><Link legacyBehavior href="/investor"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Investor</a></Link></li>
                   </ul>
                 </div>
                 <div className={`col4 ${dropDownId==3?"expand":""}`}>
                   <h1 onClick={()=>dropDownClicked(3)} className="sectionHeading description marginBottom23 positionRelative black">Support <span className="dropDownIcon">{!!dropDownId && dropDownId==3?<div className="dropDownInactiveLine"></div>:<LongArrow arrowLength="8px" arrowWidth="1px" color="black" direction="bottom-left" lineLength="15px" marginTop="6px" transformX="5px" transformY="1px" />}</span></h1>
                   <ul className="footerLinks listStyleNone">
-                    <li><Link
-                      href="/contact-us"
-                      onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()}
-                      className="bannerDescription richText">Contact Us</Link></li>
-                    {/* <li><Link href="/contact-us"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription">Privacy Policy</a></Link></li> */}
+                    <li><Link legacyBehavior href="/contact-us"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Contact Us</a></Link></li>
+                    {/* <li><Link legacyBehavior href="/contact-us"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription">Privacy Policy</a></Link></li> */}
                   </ul> 
                 </div>
                 <div className="col5">

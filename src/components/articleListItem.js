@@ -23,38 +23,26 @@ function ArticleListItem(props) {
           <div ref={imageContainerRef} className="imageContainer">
             <div className="featuredImage">
               {props?.article?.titles && (<h1 className="title smallHeading">{props.article.titles}</h1>)}
-              {props?.article?.imageType == "featuredImageLandscape" && (<div className="featuredImageLandscape marginBottom55"><Link
-                href={!!props.article.slug ? `/article/${props.article.slug}` : "#"}
-                className="black"><img alt="Image" className="featuredImageLandscape width-100" src={props.article.featuredImageLandscape}/></Link></div>)}
-              {props?.article?.imageType == "featuredImageSquare" && ( <div className="featuredImageSquare marginBottom55"><Link
-                href={!!props.article.slug.current ? `/article/${props.article.slug}` : "#"}
-                className="black"><img alt="Image" className="featuredImageSquare width-100" src={props.article.featuredImageSquare}/></Link></div>)} 
+              {props?.article?.imageType == "featuredImageLandscape" && (<div className="featuredImageLandscape marginBottom55"><Link legacyBehavior href={!!props.article.slug ? `/article/${props.article.slug}` : "#"}><a className="black"><img alt="Image" className="featuredImageLandscape width-100" src={props.article.featuredImageLandscape}/></a></Link></div>)}
+              {props?.article?.imageType == "featuredImageSquare" && ( <div className="featuredImageSquare marginBottom55"><Link legacyBehavior href={!!props.article.slug.current ? `/article/${props.article.slug}` : "#"}><a className="black"><img alt="Image" className="featuredImageSquare width-100" src={props.article.featuredImageSquare}/></a></Link></div>)} 
             </div>
-            {props?.article?.imageType == "portrait" && (<div className="marginBottom55 portrait"> <Link
-              href={!!props.article.slug ? `/article/${props.article.slug}` : "#"}
-              className="black marginBottom55 portrait"><Image height={562} width={420} alt="Image portrait" originalSrc={props.article.portrait}/></Link> </div>)}
-            {props?.article?.imageType == "square" && (<div className="marginBottom55 square"> <Link
-              href={!!props.article.slug ? `/article/${props.article.slug}` : "#"}
-              className="black marginBottom55 square"><Image height={354} width={420} alt="Image squre" originalSrc={props.article.square}/></Link></div>)}
+            {props?.article?.imageType == "portrait" && (<div className="marginBottom55 portrait"> <Link legacyBehavior href={!!props.article.slug ? `/article/${props.article.slug}` : "#"}><a className="black marginBottom55 portrait"><Image height={562} width={420} alt="Image portrait" originalSrc={props.article.portrait}/></a></Link> </div>)}
+            {props?.article?.imageType == "square" && (<div className="marginBottom55 square"> <Link legacyBehavior href={!!props.article.slug ? `/article/${props.article.slug}` : "#"}><a className="black marginBottom55 square"><Image height={354} width={420} alt="Image squre" originalSrc={props.article.square}/></a></Link></div>)}
           </div>
         </Animate>
-          <Link href={!!props?.article?.categorySlug ? `/library/${props.article.categorySlug}` : "#"}>  
-            <Animate><h2 ref={shortHeading1Ref} className="marginBottom26 shortHeading mainShortHeading category">{props.article.category}</h2></Animate> 
+          <Link legacyBehavior href={!!props?.article?.categorySlug ? `/library/${props.article.categorySlug}` : "#"}>  
+            <a><Animate><h2 ref={shortHeading1Ref} className="marginBottom26 shortHeading mainShortHeading category">{props.article.category}</h2></Animate></a> 
           </Link>
-          {!!props.article.excerpt && <Link
-            href={!!props?.article?.slug ? `/article/${props.article.slug}` : "#"}
-            className="black">
-            <Animate><div ref={headingRef} className="marginBottom26 heading smallHeading">{props.article.excerpt}</div></Animate>
+          {!!props.article.excerpt && <Link legacyBehavior href={!!props?.article?.slug ? `/article/${props.article.slug}` : "#"}>
+            <a className="black"><Animate><div ref={headingRef} className="marginBottom26 heading smallHeading">{props.article.excerpt}</div></Animate></a>
           </Link>}
-          <Link
-            href={!!props?.article?.slug ? `/article/${props.article.slug}` : "#"}
-            className={`black` }>
-            <Animate><div ref={desc3Ref} className={`marginBottom16 description desc`}>{props.article.description}</div></Animate> 
+          <Link legacyBehavior href={!!props?.article?.slug ? `/article/${props.article.slug}` : "#"}>
+            <a className={`black` }><Animate><div ref={desc3Ref} className={`marginBottom16 description desc`}>{props.article.description}</div></Animate></a> 
           </Link>
-          <Link href={!!props?.article?.slug ? `/article/${props.article.slug}` : "#"}>
-            <Animate><div ref={shortHeading3Ref} className="marginBottom26 shortHeading2 mainShortHeading">{props.article.author}</div></Animate>
+          <Link legacyBehavior href={!!props?.article?.slug ? `/article/${props.article.slug}` : "#"}>
+            <a><Animate><div ref={shortHeading3Ref} className="marginBottom26 shortHeading2 mainShortHeading">{props.article.author}</div></Animate></a>
           </Link>
-          <Link href={!!props?.article?.slug ? `/article/${props.article.slug}` : "#"}>
+          <Link legacyBehavior href={!!props?.article?.slug ? `/article/${props.article.slug}` : "#"}>
           <Animate><a ref={readMoreLinkRef} className="shortHeadingReadOn readMoreButton blackCaption grey cursorPointer">{props?.article?.label}</a></Animate>
           </Link>
       </div>

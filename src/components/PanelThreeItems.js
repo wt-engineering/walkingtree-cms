@@ -17,17 +17,14 @@ import Loader from './loader';
                 <ul className="listStyleNone">
                     {!!props.panelThreeItems && props.panelThreeItems.map((item,index)=>{
                         let delay = (index+1)*0.1
-                        return (
+                        return(
                             <li key={index} style={{animationDelay:`${delay}s`}} onMouseEnter={()=>itemHover(index,item)} className={`bigDescription listItem fadeLeftToRight cursorPointer ${panelThreeActiveItem==index?"black":"grey"}`}>
-                                <Link
-                                    href={item.link}
-                                    onClick={()=>{props.setMenuBarShow(false)}}
-                                    className="textDecoration black">{item.heading}</Link>
+                                <Link legacyBehavior href={item.link}><a onClick={()=>{props.setMenuBarShow(false)}} className="textDecoration black">{item.heading}</a></Link>
                             </li>
-                        );
+                        )
                     })}
                 </ul>
-            </div>
+            </div>   
             <style jsx>{`
                 .textDecoration{
                     text-decoration: none;
@@ -66,7 +63,7 @@ import Loader from './loader';
                 }
             `}</style>
         </>
-    );
+    )
 }
 function mapStateToProps({ common }) {
     return { common };

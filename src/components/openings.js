@@ -174,7 +174,7 @@ export default function Openings(props) {
           <div className="openings">
             {Array.isArray(props.jobOpenings) && props.jobOpenings.map((opening,id) => {
               return (
-                <div ref={el => itemsRef.current[id] = el}  className={`opening ${expanded == opening._key ? "expanded" : ""}`} key={opening._key}>
+                  <div ref={el => itemsRef.current[id] = el}  className={`opening ${expanded == opening._key ? "expanded" : ""}`} key={opening._key}>
                   <Animate>
                     <div className="openingTop cursorPointer" onClick={() => setExpanded(expanded == opening._key ? null : opening._key)}>
                       <div className="department mainShortHeading black">
@@ -203,14 +203,12 @@ export default function Openings(props) {
                         {opening.position.map((position, index) => {
                           return (
                             <div className="position" key={index}>
-                              <Link
-                                href={!!position.slug?`/culture-and-career/${position.slug}`:"#"}
-                                className="black">
-
-                                <div className="title1 moderatMedium">{position.title1}</div>
-                                <div className="title2 moderatRegular">{position.title2}</div>
-                                <div className="shortDescription description moderatLight">{position.shortDescription}</div>
-
+                              <Link legacyBehavior href={!!position.slug?`/culture-and-career/${position.slug}`:"#"}>
+                                  <a className="black">
+                                    <div className="title1 moderatMedium">{position.title1}</div>
+                                    <div className="title2 moderatRegular">{position.title2}</div>
+                                    <div className="shortDescription description moderatLight">{position.shortDescription}</div>
+                                  </a>
                               </Link>
                             </div>
                           );
@@ -218,7 +216,7 @@ export default function Openings(props) {
                       </div>
                     </div>
                     </Animate>
-                </div>
+                  </div>
               );
             })}
           </div>
@@ -350,15 +348,15 @@ export default function Openings(props) {
           }
         }
       `}</style>
-      <style jsx global>{`
-     a{
-       text-decoration: none;
-     }
-     
-     
-     `}
+       <style jsx global>{`
+      a{
+        text-decoration: none;
+      }
+      
+      
+      `}
 
-     </style>
+      </style>
     </>
   );
 }

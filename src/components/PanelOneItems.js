@@ -14,7 +14,7 @@ function PanelOneItems(props) {
                 <ul className="listStyleNone">
                     {props.menuItems?.map((item,index)=>{
                         let delay=((index+1)*0.01)+0.2
-                        return (
+                        return(
                             <li key={index} style={{animationDelay:`${delay}s`}} className={`listItem white cursorPointer ${props.common.menuShow?"fadeUpAnimation":""} menuFont`}>
                                 {!!item.dropdownItems?
                                     <div onClick={()=>setOpenDropdownId(openDropdownId==item.id?null:item.id)}>
@@ -30,27 +30,19 @@ function PanelOneItems(props) {
                                                     if(dropdownItem.download){
                                                         return <li key={`dropdownItem_${index}`}><a href={encodeURI(dropdownItem.link)} download className="white textDecoration" onClick={()=>{props.setMenuBarShow(false)}}>{dropdownItem.label}</a></li>
                                                     }
-                                                    return (
-                                                        <li key={`dropdownItem_${index}`}><Link
-                                                            href={dropdownItem.link}
-                                                            className="white textDecoration"
-                                                            onClick={()=>{props.setMenuBarShow(false)}}>{dropdownItem.label}</Link></li>
-                                                    );
+                                                    return <li key={`dropdownItem_${index}`}><Link legacyBehavior href={dropdownItem.link}><a className="white textDecoration" onClick={()=>{props.setMenuBarShow(false)}}>{dropdownItem.label}</a></Link></li>
                                                 })}
                                             </ul>
                                         </div>
                                     </div>
                                 :
-                                    <Link
-                                        href={item.link}
-                                        onClick={()=>{props.setMenuBarShow(false)}}
-                                        className= "white textDecoration"><span onMouseLeave={()=>props.setMenuCursorOpacity(false)} onMouseEnter={()=>{props.setMenuCursorOpacity(true),props.setMenuCursorImage(!!item.image ? item.image : "/images/transparent.png")}}>{item.panelOneHeading}</span></Link>
+                                    <Link legacyBehavior href={item.link}><a onClick={()=>{props.setMenuBarShow(false)}} className= "white textDecoration"><span onMouseLeave={()=>props.setMenuCursorOpacity(false)} onMouseEnter={()=>{props.setMenuCursorOpacity(true),props.setMenuCursorImage(!!item.image ? item.image : "/images/transparent.png")}}>{item.panelOneHeading}</span></a></Link>
                                 }
-                            </li>
-                        );
+                            </li>   
+                        )
                     })}
                 </ul>
-            </div>
+            </div>   
             <style jsx>{`
                 .dropdownItems{
                     font-size: 2.1rem;
@@ -94,7 +86,7 @@ function PanelOneItems(props) {
                 }
             `}</style>
         </>
-    );
+    )
 }
 function mapStateToProps({ common }) {
     return { common };

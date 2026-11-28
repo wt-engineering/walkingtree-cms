@@ -15,20 +15,16 @@ function Navbar(props) {
                     <div className="lineOne"></div>
                     <div className="lineTwo"></div>
                 </div>
-                <Link href="/">
-
-                    <div className="middleLogo positionAbsolute color font24 cursorPointer">
-                        <div>{props.background? <img alt="Logo" className="width-100" src="/images/logoDark.png"/>: <img alt="Logo" className="width-100" src="/images/logoLight.png"/>}</div>
-                    </div>
-
+                <Link legacyBehavior href="/">
+                    <a>
+                        <div className="middleLogo positionAbsolute color font24 cursorPointer">
+                            <div>{props.background? <img alt="Logo" className="width-100" src="/images/logoDark.png"/>: <img alt="Logo" className="width-100" src="/images/logoLight.png"/>}</div>
+                        </div>
+                    </a>
                 </Link>
                 <div className="rightMenu bannerDescription color">
-                    <div><Link
-                        href="/our-story"
-                        className={`color ${props.background?"underlineGreyLR":"underlineWhiteLR"} ${router?.pathname == "/our-story"?"active":""}` }>Our Story</Link></div>
-                    <div><Link
-                        href="/contact-us"
-                        className={`color ${props.background?"underlineGreyLR":"underlineWhiteLR"} ${router?.pathname == "/contact-us"?"active":""}`}>Contact Us</Link></div>
+                    <div><Link legacyBehavior href="/our-story"><a className={`color ${props.background?"underlineGreyLR":"underlineWhiteLR"} ${router?.pathname == "/our-story"?"active":""}` }>Our Story</a></Link></div>
+                    <div><Link legacyBehavior href="/contact-us"><a className={`color ${props.background?"underlineGreyLR":"underlineWhiteLR"} ${router?.pathname == "/contact-us"?"active":""}`}>Contact Us</a></Link></div>
                 </div>
             </div>
             <style jsx>{`
@@ -141,7 +137,7 @@ function Navbar(props) {
                 }
             `}</style>
         </>
-    );
+    )
 }
 function mapStateToProps({ common }) {
     return { common };

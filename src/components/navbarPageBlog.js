@@ -18,12 +18,12 @@ export default function NavbarPageBlog(props) {
           <div className="lineOne"></div>
           <div className="lineTwo"></div>
         </div>
-        <Link href="/">
-
-          <div className="middleLogo positionAbsolute white font24 cursorPointer">
-            <div className="logo">{props.logo}W T</div>
-          </div>
-
+        <Link legacyBehavior href="/">
+          <a>
+            <div className="middleLogo positionAbsolute white font24 cursorPointer">
+              <div className="logo">{props.logo}W T</div>
+            </div>
+          </a>
         </Link>
         <div className="rightMenu bannerDescription">
           <div className="group">{props.group}The Group</div>

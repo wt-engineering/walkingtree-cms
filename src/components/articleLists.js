@@ -8,8 +8,8 @@ export default function ArticleLists(props) {
   let router = useRouter()
   return (
     <>
-      <Link href={`${props.article.link}`} className="articleListItem ">
-
+     <Link legacyBehavior href={`${props.article.link}`}>
+      <a className="articleListItem ">
         <div className="marginBottom55 imageWithText">
           <Animate>
             <div  className="image">
@@ -19,8 +19,8 @@ export default function ArticleLists(props) {
         </div>
         <Animate><h2  className="mbBelowShortHeading heading smallHeading black">{props.article.excerpt}</h2></Animate>
         <Animate><div className="mbBelowShortHeading description  grey">{props.article.description}</div></Animate>
-        <div className="shortHeadingReadOn readMoreButton moderatRegular font15 grey cursorPointer">{props.article.label}</div>
-
+         <div className="shortHeadingReadOn readMoreButton moderatRegular font15 grey cursorPointer">{props.article.label}</div>
+      </a>
       </Link>
       <style jsx>{`
         .shortHeadingReadOn,.shortHeadingReadOnInside {

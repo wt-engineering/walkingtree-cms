@@ -21,15 +21,15 @@ export default function Button(props) {
           </button>
         )}
         {props.buttonType === "rectangle" && !!props.href &&(
-          <Link
-            href={props.href}
-            onMouseEnter={() => setTextChange(true)}
-            onMouseLeave={() => setTextChange(false)}
-            className={`btn richText linkElement rectangle positionRelative moderatRegular fontClass cursorPointer  ${textChange ? "hovered" : "" }`}>
-
-            <span className="defaultText width-100 black richText">{props.buttonText}</span>
-            <span className="hoveredText white width-100 richText">{props.textOnHover}</span>
-
+          <Link legacyBehavior href={props.href}>
+            <a
+              onMouseEnter={() => setTextChange(true)}
+              onMouseLeave={() => setTextChange(false)}
+              className={`btn richText linkElement rectangle positionRelative moderatRegular fontClass cursorPointer  ${textChange ? "hovered" : "" }`}
+            >
+              <span className="defaultText width-100 black richText">{props.buttonText}</span>
+              <span className="hoveredText white width-100 richText">{props.textOnHover}</span>
+            </a>
           </Link>
         )}
         {props.buttonType === "rectangleActiveClassButton"&&(
@@ -208,51 +208,51 @@ export default function Button(props) {
             {/* <img src="/images/blackArrowIcon.png" className="width-100 black" alt="Arrow"/> */}
           </div>
         )}
-      {props.buttonType === "rectangleIconLeft" && (
-        <div
-          onMouseEnter={() => setPrevButtonHover(true)}
-          onMouseLeave={() => setPrevButtonHover(false)}
-          className={`circleIconLeft cursorPointer ${
-            prevButtonHover ? "active" : ""
-          }`}
-        >
-          <img
-            src={`${
-              prevButtonHover
-                ? "/images/blackArrowIcon.png"
-                : "/images/whiteArrowIcon.png"
+        {props.buttonType === "rectangleIconLeft" && (
+          <div
+            onMouseEnter={() => setPrevButtonHover(true)}
+            onMouseLeave={() => setPrevButtonHover(false)}
+            className={`circleIconLeft cursorPointer ${
+              prevButtonHover ? "active" : ""
             }`}
-            className="width-100 height-100 white"
-            alt="Arrow"
-          />
-          {/* <img src="/images/blackArrowIcon.png" className="width-100 black" alt="Arrow"/> */}
-        </div>
-      )}
-      {props.buttonType === "circleIconDown" && (
-        <div
-          onMouseEnter={() => setNextButtonHover(true)}
-          onMouseLeave={() => setNextButtonHover(false)}
-          className={`circleIconRight positionRelative ${
-            nextButtonHover ? "active" : ""
-          }`}
-        >
-          <div className="positionRelative">
-            <div className="circleDown swipeNext ">
-            
-            </div>
+          >
+            <img
+              src={`${
+                prevButtonHover
+                  ? "/images/blackArrowIcon.png"
+                  : "/images/whiteArrowIcon.png"
+              }`}
+              className="width-100 height-100 white"
+              alt="Arrow"
+            />
+            {/* <img src="/images/blackArrowIcon.png" className="width-100 black" alt="Arrow"/> */}
           </div>
-          {/* <img
-            src={`${
-              nextButtonHover
-                ? "/images/blackArrowIcon.png"
-                : "/images/whiteArrowIcon.png"
+        )}
+        {props.buttonType === "circleIconDown" && (
+          <div
+            onMouseEnter={() => setNextButtonHover(true)}
+            onMouseLeave={() => setNextButtonHover(false)}
+            className={`circleIconRight positionRelative ${
+              nextButtonHover ? "active" : ""
             }`}
-            className="width-100 height-100 white"
-            alt="Arrow"
-          /> */}
-          {/* <img src="/images/blackArrowIcon.png" className="width-100 black" alt="Arrow"/> */}
-        </div>
-      )}
+          >
+            <div className="positionRelative">
+              <div className="circleDown swipeNext ">
+              
+              </div>
+            </div>
+            {/* <img
+              src={`${
+                nextButtonHover
+                  ? "/images/blackArrowIcon.png"
+                  : "/images/whiteArrowIcon.png"
+              }`}
+              className="width-100 height-100 white"
+              alt="Arrow"
+            /> */}
+            {/* <img src="/images/blackArrowIcon.png" className="width-100 black" alt="Arrow"/> */}
+          </div>
+        )}
       <style jsx>{`
         .rectangle {
           width: ${!!props.width ? props.width : "244px"};

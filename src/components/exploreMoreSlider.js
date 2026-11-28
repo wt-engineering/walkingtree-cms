@@ -82,7 +82,7 @@ export default function ExploreMoreSlider(props) {
             </Animate>
           </div>
           <Animate><div ref={bottomText1Ref} className="marginBottom55 text description black">{props.description}</div></Animate>
-          <Animate><div ref={bottomText2Ref} className="linkText"><Link href={props.link}>{props.linkText}</Link></div></Animate>
+          <Animate><div ref={bottomText2Ref} className="linkText"><Link legacyBehavior href={props.link}><a>{props.linkText}</a></Link></div></Animate>
         </div>
       </div>
       <style jsx>{`

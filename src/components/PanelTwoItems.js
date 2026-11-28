@@ -24,18 +24,15 @@ function PanelTwoItems(props) {
                 <ul className="listStyleNone">
                     {!!props.panelTwoItems && props.panelTwoItems.map((item,index)=>{
                         let delay = (index+1)*0.1
-                        return (
+                        return(
                             <li key={index} style={{animationDelay:`${delay}s`}}  onMouseEnter={()=>itemHover(index,item)} className={`bigDescription listItem fadeLeftToRight cursorPointer ${panelTwoActiveItem==index?"black":"grey"}`}>
-                                <Link
-                                    href={item.link}
-                                    onClick={()=>{props.setMenuBarShow(false)}}
-                                    className="black textDecoration"><span onMouseLeave={()=>props.setMenuCursorOpacity(false)} onMouseEnter={()=>{props.setMenuCursorOpacity(true),props.setMenuCursorImage(!!item.image ? item.image : "/images/transparent.png")}}>{item.heading}</span></Link>
+                                <Link legacyBehavior href={item.link}><a onClick={()=>{props.setMenuBarShow(false)}} className="black textDecoration"><span onMouseLeave={()=>props.setMenuCursorOpacity(false)} onMouseEnter={()=>{props.setMenuCursorOpacity(true),props.setMenuCursorImage(!!item.image ? item.image : "/images/transparent.png")}}>{item.heading}</span></a></Link>
                             </li>
-                        );
+                        )
                     })}
                 </ul>
                 
-            </div>
+            </div>   
             <style jsx>{`
                 .textDecoration{
                     text-decoration: none;
@@ -74,7 +71,7 @@ function PanelTwoItems(props) {
                 }  
             `}</style>
         </>
-    );
+    )
 }
 function mapStateToProps({ common }) {
     return { common };
