@@ -12,6 +12,11 @@ console.log("setFileUploadTextUpdate",props);
             props.onChange(e)
         }
         
+        // original code never called setFileError, so the job form could never be submitted
+        if(props.fileType && props.setFileError){
+            const picked = e?.target?.files?.[0]
+            props.setFileError(!!picked && picked.size > (props.maxFileSize || 2e6))
+        }
         if(props.fileType && !e?.target?.files[0]?.size>2e6){
             setFileUploadTextUpdate(`${!!e.target.files[0] ? e.target.files[0].name : "Select File"} - ${!!e.target.files[0] ? ((e.target.files[0].size)/1000).toFixed(2) : "0"}KB`)
         }  
