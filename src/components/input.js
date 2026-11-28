@@ -72,16 +72,6 @@ console.log("setFileUploadTextUpdate",props);
                     .inputComponent{
                         padding:1rem 1.5rem;
                     }
-                }
-                @media screen and (max-width: ${MOBILE_BREAKPOINT}px){
-                    .inputTag{
-                      width:90%;
-                    }
-                    .userIcon{
-                      bottom:1.3rem;
-                      right:0rem;
-                    }
-                }
             `}</style>
 
         </>
