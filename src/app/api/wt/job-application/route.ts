@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
-import { EMAIL_RE, admin, clean, notify, save } from "@/lib/forms";
+import { EMAIL_RE, admin, clean, notify, save, tooMany, visitorId } from "@/lib/forms";
 
 const MAX = 2_000_000; // matches the 2 MB limit the form already enforces
 const FILE_KEYS = ["resume", "coverLetter", "portfolio"] as const;
 
 export async function POST(req: Request) {
+  const v = visitorId(req);
+  if (await tooMany("job_application", v, 3)) return NextResponse.json({ status: "error", errors: { rate: "Too many requests. Please try again later." } }, { status: 429 });
   const form = await req.formData().catch(() => null);
   if (!form) return NextResponse.json({ status: "error" }, { status: 411 });
 
@@ -30,7 +32,7 @@ export async function POST(req: Request) {
     files[k] = path;
   }
   const payload = { firstName: f("firstName"), lastName: f("lastName"), email: f("email"), phoneNumber: f("phoneNumber"), linkedIn: f("linkedIn"), message: clean(form.get("message"), 5000), files };
-  const { error } = await save("job_application", payload);
+  const { error } = await save("job_application", { ...payload, _v: v });
   if (error) return NextResponse.json({ status: "error" }, { status: 500 });
   await notify(`New job application from ${payload.firstName} ${payload.lastName}`, { name: `${payload.firstName} ${payload.lastName}`, email: payload.email, phone: payload.phoneNumber, linkedIn: payload.linkedIn, files: Object.keys(files).join(", ") });
   return NextResponse.json({ status: "success" });

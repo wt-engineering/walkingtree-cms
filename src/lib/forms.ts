@@ -1,3 +1,4 @@
+import { createHmac } from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 
 export const admin = () =>
@@ -22,4 +23,18 @@ export async function notify(subject: string, lines: Record<string, string>) {
 
 export async function save(form: string, payload: Record<string, unknown>) {
   return admin().from("form_submissions").insert({ form, payload });
+}
+
+/** Anonymous per-visitor fingerprint (HMAC of the IP, so the raw IP is never stored). */
+export function visitorId(req: Request) {
+  const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "unknown";
+  return createHmac("sha256", process.env.SUPABASE_SERVICE_ROLE_KEY || "salt").update(ip).digest("hex").slice(0, 24);
+}
+
+/** True when this visitor already sent `limit` submissions of this form in the last 10 minutes. */
+export async function tooMany(form: string, visitor: string, limit: number) {
+  const since = new Date(Date.now() - 10 * 60_000).toISOString();
+  const { count } = await admin().from("form_submissions").select("id", { count: "exact", head: true })
+    .eq("form", form).eq("payload->>_v", visitor).gte("created_at", since);
+  return (count ?? 0) >= limit;
 }

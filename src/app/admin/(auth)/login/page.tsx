@@ -11,6 +11,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const passwordLogin_enabled = process.env.NEXT_PUBLIC_PASSWORD_LOGIN !== "off";
+  const denied = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("error") === "denied";
 
   async function passwordLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -40,7 +42,7 @@ export default function Login() {
           <p className="mt-1 text-sm text-muted">Sign in to manage the website</p>
         </div>
         <div className="rounded-2xl border border-line bg-surface p-6 shadow-sm">
-          <form onSubmit={passwordLogin} className="space-y-3">
+          {passwordLogin_enabled && <form onSubmit={passwordLogin} className="space-y-3">
             <div>
               <label className="mb-1.5 block text-xs font-medium text-muted">Email</label>
               <input className={field} type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -49,15 +51,15 @@ export default function Login() {
               <label className="mb-1.5 block text-xs font-medium text-muted">Password</label>
               <input className={field} type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </div>
-            {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-danger">{error}</p>}
             <button disabled={busy} className="w-full rounded-lg bg-accent py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-60">
               {busy ? "Signing in…" : "Sign in"}
             </button>
-          </form>
-          <div className="my-4 flex items-center gap-3 text-xs text-muted"><span className="h-px flex-1 bg-line" />or<span className="h-px flex-1 bg-line" /></div>
-          <button onClick={google} className="w-full rounded-lg border border-line py-2.5 text-sm font-medium text-muted transition hover:bg-bg">
-            Continue with Google <span className="text-xs">(soon)</span>
+          </form>}
+          {passwordLogin_enabled && <div className="my-4 flex items-center gap-3 text-xs text-muted"><span className="h-px flex-1 bg-line" />or<span className="h-px flex-1 bg-line" /></div>}
+          <button onClick={google} className="w-full rounded-lg border border-line bg-surface py-2.5 text-sm font-medium transition hover:bg-bg">
+            Continue with Google
           </button>
+          {(error || denied) && <p className="mt-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-danger">{error ?? "That Google account is not allowed. Use your @walkingtree.co account."}</p>}
         </div>
       </div>
     </main>

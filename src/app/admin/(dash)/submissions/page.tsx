@@ -34,7 +34,7 @@ export default async function Submissions() {
                 <span className="ml-auto text-xs text-muted">{new Date(r.created_at).toLocaleString()}</span>
               </summary>
               <div className="mt-3 space-y-1.5 rounded-lg bg-bg/60 p-4 text-sm">
-                {Object.entries(p).filter(([k]) => k !== "files").map(([k, v]) => v ? <p key={k}><span className="text-muted">{k}: </span><span className="whitespace-pre-wrap">{String(v)}</span></p> : null)}
+                {Object.entries(p).filter(([k]) => k !== "files" && !k.startsWith("_")).map(([k, v]) => v ? <p key={k}><span className="text-muted">{k}: </span><span className="whitespace-pre-wrap">{String(v)}</span></p> : null)}
                 {r.files.map((f: { name: string; url: string }) => <p key={f.name}><a href={f.url} target="_blank" rel="noreferrer" className="text-accent underline">Download {f.name}</a></p>)}
                 <form action={setHandled.bind(null, r.id, !r.handled)} className="pt-2">
                   <button className="rounded-lg border border-line bg-surface px-3 py-1 text-xs hover:bg-bg">{r.handled ? "Mark as new" : "Mark as handled"}</button>

@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
-import { EMAIL_RE, clean, notify, save } from "@/lib/forms";
+import { EMAIL_RE, clean, notify, save, tooMany, visitorId } from "@/lib/forms";
 
 // Same contract as the old backend: 200 on success, 411 + { errors } on invalid input.
 export async function POST(req: Request) {
+  const v = visitorId(req);
+  if (await tooMany("contact", v, 5)) return NextResponse.json({ status: "error", errors: { rate: "Too many requests. Please try again later." } }, { status: 429 });
   const b = await req.json().catch(() => null);
   if (!b) return NextResponse.json({ errors: { body: "invalid" } }, { status: 411 });
   const email = clean(b.email, 200), firstName = clean(b.firstName, 200), message = clean(b.message, 5000);
@@ -13,7 +15,7 @@ export async function POST(req: Request) {
   if (Object.keys(errors).length) return NextResponse.json({ status: "error", errors }, { status: 411 });
 
   const payload = { firstName, email, phoneNumber: clean(b.phoneNumber, 40), enquiryType: clean(b.enquiryType, 100), organizational: clean(b.organizational, 200), message };
-  const { error } = await save("contact", payload);
+  const { error } = await save("contact", { ...payload, _v: v });
   if (error) return NextResponse.json({ status: "error" }, { status: 500 });
   await notify(`New contact enquiry from ${firstName}`, payload);
   return NextResponse.json({ status: "success" });
