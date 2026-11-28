@@ -244,18 +244,10 @@ export async function getStaticProps({params}){
     try{
         data=await Sanity.fetch(query)
         data=Array.isArray(data)?data[0]:null
-        return{
-            props:{
-                data,errors
-            }
-        }
+        return {props:{data,errors}, revalidate:60}
     }catch(err){
         // console.log(err)
-        return{
-            props:{
-                data,errors
-            }
-        }
+        return {props:{data,errors}, revalidate:60}
 
     }
     

@@ -199,19 +199,11 @@ export async function getStaticProps({params}){
         }
 
 
-    return{
-        props:{
-            data,errors
-        }
-    }
+    return {props:{data,errors}, revalidate:60}
     }catch(err){
         // console.log(err)
         errors=true
-        return{
-            props:{
-                errors,data
-            }
-        }
+        return {props:{errors,data}, revalidate:60}
 
     }
 }

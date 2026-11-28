@@ -129,17 +129,9 @@ export async function getStaticProps({params}){
             }
           }
         }
-        return {
-            props:{
-                data,errors,currentPage
-            }
-        }
+        return {props:{data,errors,currentPage}, revalidate:60}
     }catch(err){
         errors=true
-        return{
-            props:{
-                errors,data
-            }
-        }
+        return {props:{errors,data}, revalidate:60}
     }
 }

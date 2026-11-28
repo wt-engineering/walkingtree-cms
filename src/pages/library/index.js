@@ -535,18 +535,10 @@ export async function getStaticProps({params}){
                   data.section3.articles=articles      
         }
         
-        return {
-            props:{
-                error,data,allArticles
-            }
-        }
+        return {props:{error,data,allArticles}, revalidate:60}
     }catch(err){
         error=true;
-        return {
-            props:{
-                error,data,allArticles
-            }
-        }
+        return {props:{error,data,allArticles}, revalidate:60}
     }
     
 }
