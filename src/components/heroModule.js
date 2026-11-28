@@ -2,7 +2,7 @@ import React, {useState,useEffect} from "react"
 import { connect } from "react-redux"
 import { setHeroImageLoaded,setMenuBarShow,setWindow2 } from "../redux/actions"
 import { MOBILE_BREAKPOINT,TABLET_LANDSCAPE_BREAKPOINT,TABLET_BREAKPOINT } from "../config"
-import NextImage from 'next/image'
+import NextImage from 'next/legacy/image'
 import Video from "./video"
 import Button from "./button"
 function HeroModule(props) {

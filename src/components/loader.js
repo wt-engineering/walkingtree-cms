@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from './Image'
 import {MOBILE_BREAKPOINT} from "../config"
-import NextImage from 'next/image'
+import NextImage from 'next/legacy/image'
 
 export default function Loader(props) {
     return (

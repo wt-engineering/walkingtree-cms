@@ -1,4 +1,4 @@
-import NextImage from 'next/image'
+import NextImage from 'next/legacy/image'
 import { useState,useEffect,useRef } from 'react'
 // import useOnScreen from '../hooks/useOnScreen'
 export default function Image(props){
