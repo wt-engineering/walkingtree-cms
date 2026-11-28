@@ -14,7 +14,7 @@ const items = [
 ];
 
 export default function Nav() {
-  const path = usePathname();
+  const path = usePathname() ?? "";
   return (
     <nav className="flex flex-col gap-0.5">
       {items.map((i) => {
