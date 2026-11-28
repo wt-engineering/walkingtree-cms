@@ -1,3 +1,4 @@
+import { getSite } from '@/lib/legacy/site'
 import React, { useEffect,useState,useRef } from "react";
 import Layout from "../../components/layout";
 import { connect } from "react-redux";
@@ -129,9 +130,9 @@ export async function getStaticProps({params}){
             }
           }
         }
-        return {props:{data,errors,currentPage}, revalidate:60}
+        return {props:{site: await getSite(), data,errors,currentPage}, revalidate:60}
     }catch(err){
         errors=true
-        return {props:{errors,data}, revalidate:60}
+        return {props:{site: await getSite(), errors,data}, revalidate:60}
     }
 }

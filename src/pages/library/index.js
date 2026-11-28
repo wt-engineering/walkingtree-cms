@@ -1,3 +1,4 @@
+import { getSite } from '@/lib/legacy/site'
 import React, { useEffect,useState, useRef} from "react";
 import HeroBlog from "../../components/heroBlog";
 import Layout from "../../components/layout";
@@ -535,10 +536,10 @@ export async function getStaticProps({params}){
                   data.section3.articles=articles      
         }
         
-        return {props:{error,data,allArticles}, revalidate:60}
+        return {props:{site: await getSite(), error,data,allArticles}, revalidate:60}
     }catch(err){
         error=true;
-        return {props:{error,data,allArticles}, revalidate:60}
+        return {props:{site: await getSite(), error,data,allArticles}, revalidate:60}
     }
     
 }

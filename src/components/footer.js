@@ -6,8 +6,10 @@ import { connect } from "react-redux";
 import { setFooterHeight , setHeroImageLoaded} from "../redux/actions";
 import Animate from "./animate";
 import Loader from '../components/loader';
+import { useSite } from "../lib/siteContext";
 
 function Footer(props) {
+  const { footer: f } = useSite();
   const footerRef = useRef();
   const [animationClass, setAnimationClass] = useState("none");
   const [addressId, setAddressId] = useState(0);
@@ -22,28 +24,12 @@ function Footer(props) {
   const [state, setState] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  let officeAddresses = [
-    {
-      country:"Europe",
-      address:"Walking Tree EU Bv,<br/>Unsaid De Burburestraat 20, 2000 Antwerp, Belgium"
-      // address:"Walking Tree EU BV,  Burburestraat 20, 2000 Antwerp, Belgium"
-
-    },
-    {
-      country:"India",
-      address:"Walking Tree Ventures Pvt Ltd<br/> D-10, Road no. 21, MIDC,<br/> Andheri (E), Mumbai, India 400093 <br/> <br/> Walking Tree India Pvt. Ltd  <br/>  Plot No, 117, Rd Number 18, <br/> Marol MIDC Industry Estate, <br/> Andheri East, Mumbai, India 400093"
-
-    },
-    {
-      country:"China",
-      address:"Walking Tree Asia <br/>  Room 802，Cuizhu <br/> building，Cuizhu North Road,<br/> Luohu district, Shenzhen, China."
-    }
-  ]
+  let officeAddresses = f.offices;
 
   const subscribe = async (email) => {
     setState("LOADING");
     setErrorMessage(null);
-    const response = await fetch(`${url}/wt/api/form/newsletter`,{
+    const response = await fetch(`/wt/api/form/newsletter`,{
       method:'POST',
       headers:{
         'Content-Type': 'application/json'
@@ -122,30 +108,21 @@ function Footer(props) {
                     <p>{errorMessage}</p>}
                 </div>
                 <div className={`col2 ${dropDownId==1?"expand":""}`}>
-                  <h1 onClick={()=>dropDownClicked(1)} className="sectionHeading description marginBottom23 positionRelative black">Explore <span className="dropDownIcon">{!!dropDownId && dropDownId==1?<div className="dropDownInactiveLine"></div>:<LongArrow arrowLength="8px" arrowWidth="1px" color="black" direction="bottom-left" lineLength="15px" marginTop="6px" transformX="5px" transformY="1px" />}</span></h1>
+                  <h1 onClick={()=>dropDownClicked(1)} className="sectionHeading description marginBottom23 positionRelative black">{f.columns[0]?.title} <span className="dropDownIcon">{!!dropDownId && dropDownId==1?<div className="dropDownInactiveLine"></div>:<LongArrow arrowLength="8px" arrowWidth="1px" color="black" direction="bottom-left" lineLength="15px" marginTop="6px" transformX="5px" transformY="1px" />}</span></h1>
                   <ul className="footerLinks listStyleNone">
-                    <li><Link legacyBehavior href="/business-to-business/design-studio-india"><a onClick={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription  richText">Design Studio India</a></Link></li>
-                    <li><Link legacyBehavior href="/business-to-business/design-studio-asia"><a onClick={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Design Studio Asia</a></Link></li>
-                    <li><Link legacyBehavior href="/direct-to-consumer/aneka"><a onClick={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Aneka</a></Link></li>
-                    <li><Link legacyBehavior href="/direct-to-consumer/unsaid"><a onClick={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Unsaid</a></Link></li>
-                    {/* <li><Link legacyBehavior href="/articles"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription">Journal</a></Link></li> */}
+                    {(f.columns[0]?.links||[]).map((l)=>(<li key={l.href}><Link legacyBehavior href={l.href}><a onClick={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">{l.label}</a></Link></li>))}
                   </ul>
                 </div>
                 <div className={`col3 ${dropDownId==2?"expand":""}`}>
-                  <h1 onClick={()=>dropDownClicked(2)} className="sectionHeading description marginBottom23 positionRelative black">About <span className="dropDownIcon">{!!dropDownId && dropDownId==2?<div className="dropDownInactiveLine"></div>:<LongArrow arrowLength="8px" arrowWidth="1px" color="black" direction="bottom-left" lineLength="15px" marginTop="6px" transformX="5px" transformY="1px" />}</span></h1>
+                  <h1 onClick={()=>dropDownClicked(2)} className="sectionHeading description marginBottom23 positionRelative black">{f.columns[1]?.title} <span className="dropDownIcon">{!!dropDownId && dropDownId==2?<div className="dropDownInactiveLine"></div>:<LongArrow arrowLength="8px" arrowWidth="1px" color="black" direction="bottom-left" lineLength="15px" marginTop="6px" transformX="5px" transformY="1px" />}</span></h1>
                   <ul className="footerLinks listStyleNone">
-                    <li><Link legacyBehavior href="/creative-process/design-and-craftmanship"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Creative Process</a></Link></li>
-                    <li><Link legacyBehavior href="/our-story"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">The Group</a></Link></li>
-                    {/* <li><Link legacyBehavior href="/group"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">The Group</a></Link></li> */}
-                    <li><Link legacyBehavior href="/people"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Careers</a></Link></li>
-                    <li><Link legacyBehavior href="/investor"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Investor</a></Link></li>
+                    {(f.columns[1]?.links||[]).map((l)=>(<li key={l.href}><Link legacyBehavior href={l.href}><a onClick={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">{l.label}</a></Link></li>))}
                   </ul>
                 </div>
                 <div className={`col4 ${dropDownId==3?"expand":""}`}>
-                  <h1 onClick={()=>dropDownClicked(3)} className="sectionHeading description marginBottom23 positionRelative black">Support <span className="dropDownIcon">{!!dropDownId && dropDownId==3?<div className="dropDownInactiveLine"></div>:<LongArrow arrowLength="8px" arrowWidth="1px" color="black" direction="bottom-left" lineLength="15px" marginTop="6px" transformX="5px" transformY="1px" />}</span></h1>
+                  <h1 onClick={()=>dropDownClicked(3)} className="sectionHeading description marginBottom23 positionRelative black">{f.columns[2]?.title} <span className="dropDownIcon">{!!dropDownId && dropDownId==3?<div className="dropDownInactiveLine"></div>:<LongArrow arrowLength="8px" arrowWidth="1px" color="black" direction="bottom-left" lineLength="15px" marginTop="6px" transformX="5px" transformY="1px" />}</span></h1>
                   <ul className="footerLinks listStyleNone">
-                    <li><Link legacyBehavior href="/contact-us"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">Contact Us</a></Link></li>
-                    {/* <li><Link legacyBehavior href="/contact-us"><a onClick ={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription">Privacy Policy</a></Link></li> */}
+                    {(f.columns[2]?.links||[]).map((l)=>(<li key={l.href}><Link legacyBehavior href={l.href}><a onClick={() => loaderAbsentAfterHeroModuleIsLoaded()} className="bannerDescription richText">{l.label}</a></Link></li>))}
                   </ul> 
                 </div>
                 <div className="col5">
@@ -162,8 +139,8 @@ function Footer(props) {
                   </div>
                   <div className="followUsTablet">
                   <h1 className="sectionHeading description black marginBottom15">Reach Us</h1>
-                  <a href="tel:1234567890" className="phNo  greyCaption marginBottom7">+91-022-6667 4100 </a>
-                  <a href="mailto:walkingtreesupport@gmail.com" className="email greyCaption">hello@walkingtree.co</a>
+                  <a href={`tel:${f.phone.replace(/[^+\d]/g,"")}`} className="phNo  greyCaption marginBottom7">{f.phone}</a>
+                  <a href={`mailto:${f.email}`} className="email greyCaption">{f.email}</a>
                 </div>
                 </div>
               </div>
@@ -173,8 +150,8 @@ function Footer(props) {
                 <div className="year moderatLight font12 ">© {year} Walking Tree Ventures. All rights reserved</div>
                 <div className="socialIcons flexItems">
                   <div className="followUs">
-                    <div><a href="tel:1234567890" className="phNo  moderatLight font12 marginBottom7 black">+91-022-6667 4100</a>
-                    <span><a href="mailto:walkingtreesupport@gmail.com" className="email moderatLight font12 black">hello@walkingtree.co </a></span>
+                    <div><a href={`tel:${f.phone.replace(/[^+\d]/g,"")}`} className="phNo  moderatLight font12 marginBottom7 black">{f.phone}</a>
+                    <span><a href={`mailto:${f.email}`} className="email moderatLight font12 black">{f.email}</a></span>
                     <span className="borderRight"></span></div>
                   </div>
                     {/* <div className="socialIcon one cursorPointer"><img src="/images/twitterBlack.png" alt="Icon" className="width-100"/></div> */}
@@ -188,8 +165,8 @@ function Footer(props) {
                 <div className="year moderatLight font10 ">© {year} Walking Tree Ventures. All rights reserved</div>
                 <div className="socialIcons flexItems">
                   <div className="followUs">
-                    <div><a href="tel:1234567890" className="phNo  moderatLight font10 marginBottom7 black">+91-022-6667 4100</a>
-                    <span><a href="mailto:walkingtreesupport@gmail.com" className="email moderatLight font10 black">hello@walkingtree.co</a></span>
+                    <div><a href={`tel:${f.phone.replace(/[^+\d]/g,"")}`} className="phNo  moderatLight font10 marginBottom7 black">{f.phone}</a>
+                    <span><a href={`mailto:${f.email}`} className="email moderatLight font10 black">{f.email}</a></span>
                     </div>
                   </div>
                     {/* <div className="socialIcon one cursorPointer"><img src="/images/twitterBlack.png" alt="Icon" className="width-100"/></div> */}
@@ -208,8 +185,8 @@ function Footer(props) {
             <div className="yearIpad moderatLight font12 ">© {year} Walking Tree Ventures. All rights reserved</div>
             <div className="socialIcons flexItems">
               <div className="followUs">
-                <div><a href="tel:1234567890" className="phNo  moderatLight font12 marginBottom7 black">+1234-567890</a>
-                 <span><a href="mailto:walkingtreesupport@gmail.com" className="email moderatLight font12 black">walkingtreesupport@gmail.com </a></span>
+                <div><a href={`tel:${f.phone.replace(/[^+\d]/g,"")}`} className="phNo  moderatLight font12 marginBottom7 black">{f.phone}</a>
+                 <span><a href={`mailto:${f.email}`} className="email moderatLight font12 black">{f.email}</a></span>
                  <span className="borderRight"></span></div>
               </div>
                 {/* <div className="socialIcon one cursorPointer"><img src="/images/twitterBlack.png" alt="Icon" className="width-100"/></div> */}

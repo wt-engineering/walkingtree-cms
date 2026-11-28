@@ -8,6 +8,7 @@ const items = [
   { label: "Pages", href: "/admin/pages", icon: icons.pages },
   { label: "Articles", href: "/admin/articles", icon: icons.articles },
   { label: "Jobs", href: "/admin/jobs", icon: icons.jobs },
+  { label: "Submissions", href: "/admin/submissions", icon: icons.articles },
   { label: "Media", href: "/admin/media", icon: icons.media },
   { label: "Navigation", href: "/admin/navigation", icon: icons.navigation },
   { label: "Settings", href: "/admin/settings", icon: icons.settings },

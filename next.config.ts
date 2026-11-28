@@ -2,6 +2,8 @@ import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // the old forms post to `${NEXT_PUBLIC_API_URI}/api/wt/...`; empty means this same site
+  env: { NEXT_PUBLIC_API_URI: "" },
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: false },
   images: {

@@ -68,7 +68,9 @@ export function Value({ k, v, onChange, ctx, depth = 0 }: { k: string; v: any; o
           </ItemBox>
         ))}
         {v.length > 0 && <button onClick={() => onChange([...v, skeleton(v[v.length - 1])])} className="rounded-lg border border-dashed border-line px-3 py-1.5 text-xs text-muted hover:border-accent hover:text-accent">+ Add {humanize(k).toLowerCase()}</button>}
-        {v.length === 0 && <p className="text-xs text-muted">Empty</p>}
+        {v.length === 0 && (ctx.arrayTemplates?.[k] !== undefined
+          ? <button onClick={() => onChange([JSON.parse(JSON.stringify(ctx.arrayTemplates![k]))])} className="rounded-lg border border-dashed border-line px-3 py-1.5 text-xs text-muted hover:border-accent hover:text-accent">+ Add {humanize(k).toLowerCase()}</button>
+          : <p className="text-xs text-muted">Empty</p>)}
       </div>
     );
   }

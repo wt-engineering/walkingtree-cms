@@ -1,3 +1,4 @@
+import { getSite } from '@/lib/legacy/site'
 import React from "react";
 import { connect } from "react-redux";
 import { setHeroImageLoaded } from "../redux/actions";
@@ -102,10 +103,10 @@ export async function getStaticProps({params}){
     try{
         data = await Sanity.fetch(query)
         data=Array.isArray(data)?data[0]:null
-        return {props:{data,errors}, revalidate:60}
+        return {props:{site: await getSite(), data,errors}, revalidate:60}
     }catch(err){
         errors=true;
-        return {props:{data,errors}, revalidate:60}
+        return {props:{site: await getSite(), data,errors}, revalidate:60}
     }
 }
   

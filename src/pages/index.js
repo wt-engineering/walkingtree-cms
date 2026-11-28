@@ -1,3 +1,4 @@
+import { getSite } from '@/lib/legacy/site'
 import React from "react";
 import Layout from "../components/layout";
 import { connect } from "react-redux";
@@ -77,8 +78,8 @@ export async function getStaticProps({params}) {
         }
       }
     }
-    return {props:{data}, revalidate:60}
+    return {props:{site: await getSite(), data}, revalidate:60}
   }catch(err){
-    return {props:{errors,data}, revalidate:60}
+    return {props:{site: await getSite(), errors,data}, revalidate:60}
   }
 }

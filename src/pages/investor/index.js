@@ -1,3 +1,4 @@
+import { getSite } from '@/lib/legacy/site'
 import React from "react";
 import SEO from "../../components/seo";
 import Layout from "../../components/layout";
@@ -38,3 +39,7 @@ function Investor() {
 }
 
 export default Investor;
+
+export async function getStaticProps(){
+  return {props:{site: await getSite()}, revalidate:60}
+}

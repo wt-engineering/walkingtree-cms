@@ -1,3 +1,4 @@
+import { getSite } from '@/lib/legacy/site'
 import React, { useEffect, useRef, useState } from "react";
 import HeroModule from "../../components/heroModule";
 import Layout from "../../components/layout";
@@ -230,9 +231,9 @@ export async function getStaticProps({params}){
             }
           }
         }
-        return {props:{data}, revalidate:60}
+        return {props:{site: await getSite(), data}, revalidate:60}
       }catch(err){
-        return {props:{errors,data}, revalidate:60}
+        return {props:{site: await getSite(), errors,data}, revalidate:60}
       }
     // try{
     //     data=await Sanity.fetch(query);

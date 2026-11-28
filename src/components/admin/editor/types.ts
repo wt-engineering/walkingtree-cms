@@ -5,6 +5,8 @@ export type Ctx = {
   media: MediaIndex;
   pick: (kind: "image" | "video" | "file" | "any", cb: (m: MediaItem) => void) => void;
   addMedia: (m: MediaItem) => void;
+  /** blueprint for the first item of an empty array, by field name */
+  arrayTemplates?: Record<string, unknown>;
 };
 
 export const humanize = (k: string) =>

@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react'
 import { connect } from "react-redux";
 import { setDefaultPanelData, setMenuBarShow, setPanelOneData, setPanelThreeData, setPanelTwoData } from "../redux/actions";
 import PanelOneItems from './PanelOneItems';
-import {menuItems} from "../staticData/menuData"
+import { useSite } from "../lib/siteContext"
 import { MOBILE_BREAKPOINT, MEDIUM_BREAKPOINT,TABLET_LANDSCAPE_BREAKPOINT,TABLET_BREAKPOINT } from "../config";
 import NewsLetterSignUp from './NewsLetterSignUp';
 
 function Menu(props) {
+    const { menu: menuItems } = useSite()
     return (
         <>
             <div className={`menuContent positionRelative height-100 ${props.common.menuShow?"hideMenuBar":""} ${!!props.common.panelTwoData?"secondPanelDataActive":""} ${!!props.common.panelThreeData?"thirdPanelDataActive":""}`}>

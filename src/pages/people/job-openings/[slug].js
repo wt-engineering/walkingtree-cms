@@ -1,3 +1,4 @@
+import { getSite } from '@/lib/legacy/site'
 import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../../components/layout";
 import { gsap } from "gsap/dist/gsap";
@@ -127,8 +128,8 @@ export async function getStaticProps({params}){
     try{
         data=await Sanity.fetch(query);
         data=Array.isArray(data)?data[0]:null;
-        return {props:{data,slug,error}, revalidate:60}
+        return {props:{site: await getSite(), data,slug,error}, revalidate:60}
     }catch(err){
-        return {props:{error}, revalidate:60}
+        return {props:{site: await getSite(), error}, revalidate:60}
     }
 }
